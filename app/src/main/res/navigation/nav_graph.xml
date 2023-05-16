@@ -23,7 +23,14 @@
         tools:layout="@layout/fragment_view_pager" >
         <action
             android:id="@+id/action_viewPagerFragment_to_sportFragment"
-            app:destination="@id/sportFragment" />
+            app:destination="@id/sportFragment">
+            <argument
+                android:name="weekData"
+                app:argType="com.ayd.pushapp.model.WeekData" />
+            <argument
+                android:name="index"
+                app:argType="integer"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/mainFragment"

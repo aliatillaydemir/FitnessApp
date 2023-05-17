@@ -63,17 +63,18 @@ class SportFragment : Fragment() {
         binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
         binding.textView4.text = weekData.days[day_index].dayOfWeek
 
-/*        val counterValue = weekData.days[day_index].timeValue
-
-        if (counterValue > 0) {
-            // Counter is not zero, disable next button and set it to red
-            binding.nextButton.isEnabled = false
-            binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
-        } else {
-            // Counter is zero, enable next button and set it to green
-            binding.nextButton.isEnabled = true
-            binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }*/
+        //val counterValue = weekData.days[day_index].timeValue
+        timeViewModel.isCounterRunning.observe(viewLifecycleOwner) { isRunning ->
+            if (isRunning) {
+                // Counter is running, disable next button and set it to red
+                binding.nextButton.isEnabled = false
+                binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
+            } else {
+                // Counter is not running, enable next button and set it to green
+                binding.nextButton.isEnabled = true
+                binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
+            }
+        }
 
     }
 

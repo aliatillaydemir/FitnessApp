@@ -39,7 +39,11 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
+            app:destination="@id/viewPagerFragment" >
+            <argument
+                android:name="level"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/sportFragment"

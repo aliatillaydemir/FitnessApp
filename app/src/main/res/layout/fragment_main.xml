@@ -20,22 +20,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/buttonlvl2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
         android:text="level 2"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/button_design3"
         app:layout_constraintEnd_toEndOf="@+id/buttonlvl1"
         app:layout_constraintStart_toStartOf="@+id/buttonlvl1"
         app:layout_constraintTop_toBottomOf="@+id/buttonlvl1" />
 
-    <Button
+    <TextView
         android:id="@+id/buttonlvl3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
         android:text="level 3"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/button_design2"
         app:layout_constraintEnd_toEndOf="@+id/buttonlvl2"
         app:layout_constraintStart_toStartOf="@+id/buttonlvl2"
         app:layout_constraintTop_toBottomOf="@+id/buttonlvl2" />

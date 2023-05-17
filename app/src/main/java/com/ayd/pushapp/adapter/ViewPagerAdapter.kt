@@ -1,5 +1,6 @@
 package com.ayd.pushapp.adapter
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -12,6 +13,12 @@ class ViewPagerAdapter(
     lifecycle: Lifecycle
 ): FragmentStateAdapter(fragmentManager, lifecycle) {
 
+    private var level: String? = null
+
+    fun setLevel(level: String?) {
+        this.level = level
+    }
+
     private val fragmentList = list
 
     override fun getItemCount(): Int {
@@ -19,28 +26,61 @@ class ViewPagerAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentList[position]
-/*        return when(position){
+        /*return fragmentList[position]*/
+        return when(position){
             0 -> {
-                FirstWeek()
+                val fragment = FirstWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
             }
             1 -> {
-                SecondWeek()
+                val fragment = SecondWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
             }
             2 -> {
-                ThirdWeek()
+                val fragment = ThirdWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
             }
             3 -> {
-                FourthWeek()
+                val fragment = FourthWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
             }
             4 ->{
-                FifthWeek()
+                val fragment = FifthWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
             }
-            else -> {
-                SixthWeek()
+            5 -> {
+                val fragment = SixthWeek()
+                val args = Bundle().apply {
+                    putString("level", level)
+                }
+                fragment.arguments = args
+                fragment
+            }
+            else ->{
+                throw IllegalArgumentException("Invalid position: $position")
             }
 
-        }*/
+        }
     }
 
 }

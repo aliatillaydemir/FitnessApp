@@ -59,9 +59,10 @@ class SportFragment : Fragment() {
     }
 
     private fun updateDisplayedNumber() {
-        binding.textView2.text = "Numbers: ${numbersList[list_index]}"
+        binding.textView2.text = "Numbers: ${weekData.days[day_index].numbers[list_index]}"
         binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
         binding.textView4.text = weekData.days[day_index].dayOfWeek
+        binding.stepText.text = "->>" + "   Step: ${list_index+1}/${numbersList.size}"
 
         //val counterValue = weekData.days[day_index].timeValue
         timeViewModel.isCounterRunning.observe(viewLifecycleOwner) { isRunning ->

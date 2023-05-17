@@ -27,41 +27,77 @@ class SixthWeek : Fragment() {
         _binding = FragmentSixthWeekBinding.inflate(inflater, container, false)
 
 
-        // Create and set the WeekData instance
-        val weekData = WeekData(
-            weekNumber = 6,
-            days = listOf(
-                DayData("Monday", 60, listOf(5, 3, 2, 8, 3)),
-                DayData("Tuesday", 45, listOf(1, 3, 2, 1, 4)),
-                DayData("Wednesday", 30, listOf(4, 3, 9, 2, 3)),
-                DayData("Thursday", 15, listOf(3, 3, 10, 1, 7)),
-                DayData("Friday", 40, listOf(2, 3, 2, 6, 3))
-            )
-        )
+        val level = requireArguments().getString("level")
+        val weekData: WeekData?
+
+        when (level) {
+            "level1" -> {
+                weekData = WeekData(
+                    weekNumber = 6,
+                    days = listOf(
+                        DayData("Monday", 60, listOf()),
+                        DayData("Tuesday", 45, listOf()),
+                        DayData("Wednesday", 90, listOf()),
+                        DayData("Thursday", 30, listOf()),
+                        DayData("Friday", 120, listOf())
+                    )
+                )
+            }
+            "level2" -> {
+                weekData = WeekData(
+                    weekNumber = 6,
+                    days = listOf(
+                        DayData("Monday", 60, listOf()),
+                        DayData("Tuesday", 45, listOf()),
+                        DayData("Wednesday", 90, listOf()),
+                        DayData("Thursday", 30, listOf()),
+                        DayData("Friday", 120, listOf())
+                    )
+                )
+            }
+            "level3" -> {
+                weekData = WeekData(
+                    weekNumber = 6,
+                    days = listOf(
+                        DayData("Monday", 60, listOf(91,80,78,78,72,71,93)),
+                        DayData("Tuesday", 45, listOf(55,52,50,50,48,46,44,95)),
+                        DayData("Wednesday", 90, listOf(95,90,85,82,80,70,97)),
+                        DayData("Thursday", 30, listOf(60,50,48,48,46,44,42,98)),
+                        DayData("Friday", 120, listOf(100,95,92,90,100))
+                    )
+                )
+            }
+            else -> {
+                // Handle the case when level is not "level1", "level2", or "level3"
+                weekData = null
+            }
+        }
 
         // Set click listeners for the days
-        binding.day1.setOnClickListener {
-            navigateToSportFragment(weekData, 0)
+        if (weekData != null) {
+            binding.day1.setOnClickListener {
+                navigateToSportFragment(weekData, 0)
+            }
+            binding.day2.setOnClickListener {
+                navigateToSportFragment(weekData, 1)
+            }
+            binding.day3.setOnClickListener {
+                navigateToSportFragment(weekData, 2)
+            }
+            binding.day4.setOnClickListener {
+                navigateToSportFragment(weekData, 3)
+            }
+            binding.day5.setOnClickListener {
+                navigateToSportFragment(weekData, 4)
+            }
         }
-        binding.day2.setOnClickListener {
-            navigateToSportFragment(weekData, 1)
-        }
-        binding.day3.setOnClickListener {
-            navigateToSportFragment(weekData, 2)
-        }
-        binding.day4.setOnClickListener {
-            navigateToSportFragment(weekData, 3)
-        }
-        binding.day5.setOnClickListener {
-            navigateToSportFragment(weekData, 4)
-        }
-
 
         return binding.root
     }
 
     private fun navigateToSportFragment(weekData: WeekData, index: Int) {
-        val action = ViewPagerFragmentDirections.actionViewPagerFragmentToSportFragment(weekData, index)
+        val action =
+            ViewPagerFragmentDirections.actionViewPagerFragmentToSportFragment(weekData, index)
         findNavController().navigate(action)
     }
 

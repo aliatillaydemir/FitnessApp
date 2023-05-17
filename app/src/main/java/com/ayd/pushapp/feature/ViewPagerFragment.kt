@@ -29,12 +29,21 @@ class ViewPagerFragment : Fragment() {
             ThirdWeek(),
             FourthWeek(),
             FifthWeek(),
-            SixthWeek()
+            //SixthWeek() its just for level3
         )
+
+        val level = arguments?.getString("level")  //its for viewPagerFragment(how much week?)
+
+        if(level == "level3"){
+            fragmentList.add(SixthWeek())
+        }
 
         val adapter = ViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
         binding.indicator.attachTo(binding.viewPager)
+
+        // Pass the level argument to the adapter
+        adapter.setLevel(arguments?.getString("level")) //its for week1, week2, week3...(weeks in ViewPagerFragment. So its for adapter)
 
         return binding.root
     }

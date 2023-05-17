@@ -23,15 +23,24 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
 
         binding.buttonlvl1.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_viewPagerFragment)
+            val bundle = Bundle().apply {
+                putString("level", "level1")
+            }
+            findNavController().navigate(R.id.action_mainFragment_to_viewPagerFragment, bundle)
         }
 
         binding.buttonlvl2.setOnClickListener {
-
+            val bundle = Bundle().apply {
+                putString("level", "level2")
+            }
+            findNavController().navigate(R.id.action_mainFragment_to_viewPagerFragment, bundle)
         }
 
         binding.buttonlvl3.setOnClickListener {
-
+            val bundle = Bundle().apply {
+                putString("level", "level3")
+            }
+            findNavController().navigate(R.id.action_mainFragment_to_viewPagerFragment, bundle)
         }
 
         return binding.root

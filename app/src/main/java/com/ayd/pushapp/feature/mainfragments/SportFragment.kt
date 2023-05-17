@@ -47,7 +47,6 @@ class SportFragment : Fragment() {
                 updateDisplayedNumber()
             }else{
                 //db connection
-                weekData.days
                 findNavController().navigate(R.id.action_sportFragment_to_congratsFragment)
             }
         }

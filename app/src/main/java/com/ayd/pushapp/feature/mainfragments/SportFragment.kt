@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ayd.pushapp.R
 import com.ayd.pushapp.databinding.FragmentSportBinding
 import com.ayd.pushapp.model.WeekData
@@ -44,6 +45,10 @@ class SportFragment : Fragment() {
             if (list_index < numbersList.size - 1) {
                 list_index++
                 updateDisplayedNumber()
+            }else{
+                //db connection
+                weekData.days
+                findNavController().navigate(R.id.action_sportFragment_to_congratsFragment)
             }
         }
 

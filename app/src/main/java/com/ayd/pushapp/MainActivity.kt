@@ -2,6 +2,8 @@ package com.ayd.pushapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import com.ayd.pushapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +19,19 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+    }
 
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.fragmentContainerView)
+
+        when(navController.currentDestination?.id){
+            R.id.mainFragment -> {
+                finish()
+            }
+            else -> {
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
     }
 
 }

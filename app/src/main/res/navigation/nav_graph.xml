@@ -49,5 +49,22 @@
         android:id="@+id/sportFragment"
         android:name="com.ayd.pushapp.feature.mainfragments.SportFragment"
         android:label="fragment_sport"
-        tools:layout="@layout/fragment_sport" />
+        tools:layout="@layout/fragment_sport" >
+        <action
+            android:id="@+id/action_sportFragment_to_congratsFragment"
+            app:destination="@id/congratsFragment"
+            app:popUpTo="@id/sportFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/congratsFragment"
+        android:name="com.ayd.pushapp.feature.mainfragments.CongratsFragment"
+        android:label="fragment_congrats"
+        tools:layout="@layout/fragment_congrats" >
+        <action
+            android:id="@+id/action_congratsFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/congratsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

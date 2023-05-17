@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import com.ayd.pushapp.R
 import com.ayd.pushapp.databinding.FragmentSportBinding
-import com.ayd.pushapp.feature.ViewPagerFragmentDirections
 import com.ayd.pushapp.model.WeekData
-import kotlin.time.Duration.Companion.days
+import com.ayd.pushapp.viewmodel.TimeCounterViewModel
 
 
 class SportFragment : Fragment() {
@@ -17,7 +18,13 @@ class SportFragment : Fragment() {
     private var _binding: FragmentSportBinding? = null
     private val binding get() = _binding!!
 
-    //private var index: Int = 0
+    private lateinit var weekData: WeekData
+    private lateinit var numbersList: List<Int>
+
+    private var day_index: Int = 0
+    private var list_index = 0
+
+    private val timeViewModel: TimeCounterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,18 +32,69 @@ class SportFragment : Fragment() {
     ): View {
         _binding = FragmentSportBinding.inflate(inflater, container, false)
 
-        val weekData = arguments?.getParcelable<WeekData>("weekData")
-        val index = arguments?.getInt("index")
+        weekData = arguments?.getParcelable("weekData")!!
+        day_index = arguments?.getInt("index")!!
 
-        weekData?.let {
-            binding.textView.text = "Week Number: ${weekData.weekNumber}"
-            binding.textView2.text = "Numbers: ${weekData.days[index!!].numbers}"
-            binding.textView3.text = "Time value: ${weekData.days[index].timeValue} sec."
-            binding.textView4.text = weekData.days[index].dayOfWeek
+        numbersList = weekData.days[day_index].numbers
+
+        binding.textView.text = "Week Number: ${weekData.weekNumber}"
+        updateDisplayedNumber()
+
+        binding.nextButton.setOnClickListener {
+            if (list_index < numbersList.size - 1) {
+                list_index++
+                updateDisplayedNumber()
+            }
+        }
+
+        binding.counterButton.setOnClickListener {
+            startCountDown(weekData.days[day_index].timeValue)
+        }
+
+        binding.resetButton.setOnClickListener {
+            resetCountdown()
         }
 
         return binding.root
     }
 
+    private fun updateDisplayedNumber() {
+        binding.textView2.text = "Numbers: ${numbersList[list_index]}"
+        binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
+        binding.textView4.text = weekData.days[day_index].dayOfWeek
 
+/*        val counterValue = weekData.days[day_index].timeValue
+
+        if (counterValue > 0) {
+            // Counter is not zero, disable next button and set it to red
+            binding.nextButton.isEnabled = false
+            binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
+        } else {
+            // Counter is zero, enable next button and set it to green
+            binding.nextButton.isEnabled = true
+            binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
+        }*/
+
+    }
+
+    private fun startCountDown(seconds: Int) {
+        timeViewModel.startCountDown(seconds,
+            onTick = {remainingSeconds ->
+                binding.timerTextView.text = "Countdown: $remainingSeconds sec."
+            },
+            onFinish = {
+                binding.timerTextView.text = "Countdown: 0 sec"
+            })
+    }
+
+    private fun resetCountdown() {
+        timeViewModel.resetCountdown()
+        binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

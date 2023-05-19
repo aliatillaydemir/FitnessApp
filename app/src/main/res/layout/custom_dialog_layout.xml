@@ -42,8 +42,8 @@
         <TextView
             android:id="@+id/noButton"
             android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
+            android:layout_height="42dp"
+            android:textSize="24sp"
             android:text="No"
             android:textStyle="italic"
             android:textColor="#020202"
@@ -54,8 +54,8 @@
         <TextView
             android:id="@+id/yesButton"
             android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
+            android:layout_height="42dp"
+            android:textSize="24sp"
             android:text="Yes"
             android:textStyle="italic"
             android:textColor="@color/white"

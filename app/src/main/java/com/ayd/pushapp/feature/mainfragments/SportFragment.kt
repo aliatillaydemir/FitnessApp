@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -30,12 +31,15 @@ class SportFragment : Fragment() {
     private lateinit var numbersList: List<Int>
 
     private var day_index: Int = 0
-    private var list_index = 0
+    private var list_index: Int = 0
 
     private val timeViewModel: TimeCounterViewModel by viewModels()
 
     private lateinit var dayDataDao: DayDataDao
     private lateinit var db: AppDatabase
+
+    private lateinit var progressBar: ProgressBar
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +55,9 @@ class SportFragment : Fragment() {
 
         numbersList = weekData.days[day_index].numbers
 
-        binding.textView.text = "Week Number: ${weekData.weekNumber}"
+        progressBar = binding.progressBar
+
+        binding.textView.text = "(Week ${weekData.weekNumber})"
         updateDisplayedNumber()
 
         binding.nextButton.setOnClickListener {
@@ -64,6 +70,15 @@ class SportFragment : Fragment() {
                 val dayDataEntity = DayData(dayData.id, dayData.dayOfWeek, dayData.timeValue, dayData.numbers)
 
                 insertDayData(dayDataEntity)
+            }
+        }
+
+        binding.backButton.setOnClickListener {
+            if (list_index > 0) {
+                list_index--
+                updateDisplayedNumber()
+            }else{
+                //nothing
             }
         }
 
@@ -89,10 +104,13 @@ class SportFragment : Fragment() {
     }
 
     private fun updateDisplayedNumber() {
-        binding.textView2.text = "Numbers: ${weekData.days[day_index].numbers[list_index]}"
-        binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
+        binding.textView2.text = "${weekData.days[day_index].numbers[list_index]}"
+        binding.timerTextView.text = "${weekData.days[day_index].timeValue}"
         binding.textView4.text = weekData.days[day_index].dayOfWeek
-        binding.stepText.text = "->>" + "   Step: ${list_index+1}/${numbersList.size}"
+        binding.stepText.text = "${list_index+1}/${numbersList.size}"
+
+        val progress = weekData.days[day_index].timeValue * 100
+        progressBar.progress = progress
 
         //val counterValue = weekData.days[day_index].timeValue
         timeViewModel.isCounterRunning.observe(viewLifecycleOwner) { isRunning ->
@@ -100,10 +118,16 @@ class SportFragment : Fragment() {
                 // Counter is running, disable next button and set it to red
                 binding.nextButton.isEnabled = false
                 binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
+
+                binding.backButton.isEnabled = false
+                binding.backButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red))
             } else {
                 // Counter is not running, enable next button and set it to green
                 binding.nextButton.isEnabled = true
                 binding.nextButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
+
+                binding.backButton.isEnabled = true
+                binding.backButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
         }
 
@@ -112,16 +136,19 @@ class SportFragment : Fragment() {
     private fun startCountDown(seconds: Int) {
         timeViewModel.startCountDown(seconds,
             onTick = {remainingSeconds ->
-                binding.timerTextView.text = "Countdown: $remainingSeconds sec."
+                binding.timerTextView.text = "$remainingSeconds"
+                val progress = (remainingSeconds.toFloat() / weekData.days[day_index].timeValue.toFloat() * 100).toInt()
+                progressBar.progress = progress
             },
             onFinish = {
-                binding.timerTextView.text = "Countdown: 0 sec"
+                binding.timerTextView.text = "0"
             })
     }
 
     private fun resetCountdown() {
         timeViewModel.resetCountdown()
-        binding.timerTextView.text = "Countdown: ${weekData.days[day_index].timeValue} sec."
+        binding.timerTextView.text = "${weekData.days[day_index].timeValue}"
+        progressBar.progress = 100
     }
 
 

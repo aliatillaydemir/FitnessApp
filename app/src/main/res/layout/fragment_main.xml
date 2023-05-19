@@ -9,10 +9,11 @@
 
     <TextView
         android:id="@+id/buttonlvl1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="180dp"
         android:text="Level 1"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:gravity="center"
         android:background="@drawable/button_design"
@@ -22,11 +23,12 @@
 
     <TextView
         android:id="@+id/buttonlvl2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="32dp"
         android:text="level 2"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:gravity="center"
         android:background="@drawable/button_design3"
         app:layout_constraintEnd_toEndOf="@+id/buttonlvl1"
@@ -35,11 +37,12 @@
 
     <TextView
         android:id="@+id/buttonlvl3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="32dp"
         android:text="level 3"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:gravity="center"
         android:background="@drawable/button_design2"
         app:layout_constraintEnd_toEndOf="@+id/buttonlvl2"

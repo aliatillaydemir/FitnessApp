@@ -5,19 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ayd.pushapp.R
+import com.ayd.pushapp.data.database.AppDatabase
+import com.ayd.pushapp.data.database.DayDataDao
 import com.ayd.pushapp.databinding.FragmentFifthWeekBinding
 import com.ayd.pushapp.databinding.FragmentFirstWeekBinding
 import com.ayd.pushapp.feature.ViewPagerFragmentDirections
 import com.ayd.pushapp.model.DayData
 import com.ayd.pushapp.model.WeekData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class FifthWeek : Fragment() {
 
     private var _binding: FragmentFifthWeekBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var dayDataDao: DayDataDao
+    private lateinit var db: AppDatabase
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        db = AppDatabase.getInstance(requireContext())
+        dayDataDao = db.dayDataDao()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +50,11 @@ class FifthWeek : Fragment() {
                 weekData = WeekData(
                     weekNumber = 5,
                     days = listOf(
-                        DayData("Monday", 60, listOf(20,18,16,14,20)),
-                        DayData("Tuesday", 45, listOf(15,19,14,13,22)),
-                        DayData("Wednesday", 90, listOf(17,22,16,15,22)),
-                        DayData("Thursday", 30, listOf(21,12,10,8,6,5,4,23)),
-                        DayData("Friday", 120, listOf(25,23,22,20,25))
+                        DayData(61,"Monday", 60, listOf(20,18,16,14,20)),
+                        DayData(62,"Tuesday", 45, listOf(15,19,14,13,22)),
+                        DayData(63,"Wednesday", 90, listOf(17,22,16,15,22)),
+                        DayData(64,"Thursday", 30, listOf(21,12,10,8,6,5,4,23)),
+                        DayData(65,"Friday", 120, listOf(25,23,22,20,25))
                     )
                 )
             }
@@ -47,11 +62,11 @@ class FifthWeek : Fragment() {
                 weekData = WeekData(
                     weekNumber = 5,
                     days = listOf(
-                        DayData("Monday", 60, listOf(46,43,29,41,46)),
-                        DayData("Tuesday", 45, listOf(25,25,26,26,24,24,22,47)),
-                        DayData("Wednesday", 90, listOf(50,48,45,45,48)),
-                        DayData("Thursday", 30, listOf(23,23,25,25,22,22,20,48)),
-                        DayData("Friday", 120, listOf(50,48,46,44,50))
+                        DayData(66,"Monday", 60, listOf(46,43,29,41,46)),
+                        DayData(67,"Tuesday", 45, listOf(25,25,26,26,24,24,22,47)),
+                        DayData(68,"Wednesday", 90, listOf(50,48,45,45,48)),
+                        DayData(69,"Thursday", 30, listOf(23,23,25,25,22,22,20,48)),
+                        DayData(70,"Friday", 120, listOf(50,48,46,44,50))
                     )
                 )
             }
@@ -59,17 +74,40 @@ class FifthWeek : Fragment() {
                 weekData = WeekData(
                     weekNumber = 5,
                     days = listOf(
-                        DayData("Monday", 60, listOf(81,60,64,66,68,70,83)),
-                        DayData("Tuesday", 45, listOf(45,42,40,40,38,36,36,85)),
-                        DayData("Wednesday", 90, listOf(85,80,75,72,70,65,87)),
-                        DayData("Thursday", 30, listOf(45,40,38,38,36,34,32,88)),
-                        DayData("Friday", 120, listOf(90,85,82,80,90))
+                        DayData(71,"Monday", 60, listOf(81,60,64,66,68,70,83)),
+                        DayData(72,"Tuesday", 45, listOf(45,42,40,40,38,36,36,85)),
+                        DayData(73,"Wednesday", 90, listOf(85,80,75,72,70,65,87)),
+                        DayData(74,"Thursday", 30, listOf(45,40,38,38,36,34,32,88)),
+                        DayData(75,"Friday", 120, listOf(90,85,82,80,90))
                     )
                 )
             }
             else -> {
                 // Handle the case when level is not "level1", "level2", or "level3"
                 weekData = null
+            }
+        }
+
+        if (weekData != null) {
+            for (i in weekData.days.indices) {
+                val currentDay = weekData.days[i]
+                lifecycleScope.launch {
+                    val dayData = withContext(Dispatchers.IO) {
+                        dayDataDao.getDayDataById(currentDay.id)
+                    }
+                    if (dayData != null) {
+                        withContext(Dispatchers.Main) {
+                            // Day data exists in the database, update UI accordingly
+                            when (i) {
+                                0 -> binding.day1.setBackgroundColor(R.drawable.button_design3)
+                                1 -> binding.day2.setBackgroundColor(R.drawable.button_design3)
+                                2 -> binding.day3.setBackgroundColor(R.drawable.button_design3)
+                                3 -> binding.day4.setBackgroundColor(R.drawable.button_design3)
+                                4 -> binding.day5.setBackgroundColor(R.drawable.button_design3)
+                            }
+                        }
+                    }
+                }
             }
         }
 

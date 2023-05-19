@@ -7,11 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ayd.pushapp.data.database.AppDatabase
+import com.ayd.pushapp.data.database.DayDataDao
 import com.ayd.pushapp.R
 import com.ayd.pushapp.databinding.FragmentSportBinding
+import com.ayd.pushapp.model.DayData
 import com.ayd.pushapp.model.WeekData
 import com.ayd.pushapp.viewmodel.TimeCounterViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SportFragment : Fragment() {
@@ -27,11 +34,17 @@ class SportFragment : Fragment() {
 
     private val timeViewModel: TimeCounterViewModel by viewModels()
 
+    private lateinit var dayDataDao: DayDataDao
+    private lateinit var db: AppDatabase
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSportBinding.inflate(inflater, container, false)
+
+        db = AppDatabase.getInstance(requireContext())
+        dayDataDao = db.dayDataDao()
 
         weekData = arguments?.getParcelable("weekData")!!
         day_index = arguments?.getInt("index")!!
@@ -46,8 +59,11 @@ class SportFragment : Fragment() {
                 list_index++
                 updateDisplayedNumber()
             }else{
-                //db connection
-                findNavController().navigate(R.id.action_sportFragment_to_congratsFragment)
+                // Insert data into the database
+                val dayData = weekData.days[day_index]
+                val dayDataEntity = DayData(dayData.id, dayData.dayOfWeek, dayData.timeValue, dayData.numbers)
+
+                insertDayData(dayDataEntity)
             }
         }
 
@@ -60,6 +76,16 @@ class SportFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun insertDayData(dayDataEntity: DayData) {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                dayDataDao.insert(dayDataEntity)
+            }
+            // Navigation logic after inserting data
+            findNavController().navigate(R.id.action_sportFragment_to_congratsFragment)
+        }
     }
 
     private fun updateDisplayedNumber() {

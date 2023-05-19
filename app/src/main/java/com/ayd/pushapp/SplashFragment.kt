@@ -27,7 +27,7 @@ class SplashFragment : Fragment(), CoroutineScope {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         launch {
-            delay(2000)
+            delay(3500)
             withContext(coroutineContext){
                 findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
             }

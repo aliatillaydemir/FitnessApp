@@ -1,10 +1,16 @@
 package com.ayd.pushapp.feature.pagerfragments
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ayd.pushapp.data.database.AppDatabase
@@ -86,6 +92,27 @@ class SecondWeek : Fragment() {
             }
         }
 
+        binding.delete1.setOnClickListener {
+            val dayIdToDelete = weekData?.days?.getOrNull(0)?.id
+            showDialogBox(0,dayIdToDelete!!)
+        }
+        binding.delete2.setOnClickListener {
+            val dayIdToDelete = weekData?.days?.getOrNull(1)?.id
+            showDialogBox(1,dayIdToDelete!!)
+        }
+        binding.delete3.setOnClickListener {
+            val dayIdToDelete = weekData?.days?.getOrNull(2)?.id
+            showDialogBox(2,dayIdToDelete!!)
+        }
+        binding.delete4.setOnClickListener {
+            val dayIdToDelete = weekData?.days?.getOrNull(3)?.id
+            showDialogBox(3,dayIdToDelete!!)
+        }
+        binding.delete5.setOnClickListener {
+            val dayIdToDelete = weekData?.days?.getOrNull(4)?.id
+            showDialogBox(4,dayIdToDelete!!)
+        }
+
         if (weekData != null) {
             for (i in weekData.days.indices) {
                 val currentDay = weekData.days[i]
@@ -97,11 +124,26 @@ class SecondWeek : Fragment() {
                         withContext(Dispatchers.Main) {
                             // Day data exists in the database, update UI accordingly
                             when (i) {
-                                0 -> binding.day1.setBackgroundColor(R.drawable.button_design3)
-                                1 -> binding.day2.setBackgroundColor(R.drawable.button_design3)
-                                2 -> binding.day3.setBackgroundColor(R.drawable.button_design3)
-                                3 -> binding.day4.setBackgroundColor(R.drawable.button_design3)
-                                4 -> binding.day5.setBackgroundColor(R.drawable.button_design3)
+                                0 ->{
+                                    binding.white1.visibility = View.INVISIBLE
+                                    binding.green1.visibility = View.VISIBLE
+                                }
+                                1 -> {
+                                    binding.white2.visibility = View.INVISIBLE
+                                    binding.green2.visibility = View.VISIBLE
+                                }
+                                2 -> {
+                                    binding.white3.visibility = View.INVISIBLE
+                                    binding.green3.visibility = View.VISIBLE
+                                }
+                                3 -> {
+                                    binding.white4.visibility = View.INVISIBLE
+                                    binding.green4.visibility = View.VISIBLE
+                                }
+                                4 -> {
+                                    binding.white5.visibility = View.INVISIBLE
+                                    binding.green5.visibility = View.VISIBLE
+                                }
                             }
                         }
                     }
@@ -129,6 +171,59 @@ class SecondWeek : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun showDialogBox(btnIndex: Int, dayIdToDelete: Int) {
+
+        val dialog = Dialog(this.requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.custom_dialog_layout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val yesButton: TextView = dialog.findViewById(R.id.yesButton)
+        val noButton: TextView = dialog.findViewById(R.id.noButton)
+
+        yesButton.setOnClickListener {
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO){
+                    dayDataDao.deleteDayDataById(dayIdToDelete)
+                }
+                withContext(Dispatchers.Main){
+                    when(btnIndex){
+                        0 -> {
+                            binding.white1.visibility = View.VISIBLE
+                            binding.green1.visibility = View.INVISIBLE
+                        }
+                        1 -> {
+                            binding.white2.visibility = View.VISIBLE
+                            binding.green2.visibility = View.INVISIBLE
+                        }
+                        2 -> {
+                            binding.white3.visibility = View.VISIBLE
+                            binding.green3.visibility = View.INVISIBLE
+                        }
+                        3 -> {
+                            binding.white4.visibility = View.VISIBLE
+                            binding.green4.visibility = View.INVISIBLE
+                        }
+                        4 -> {
+                            binding.white5.visibility = View.VISIBLE
+                            binding.green5.visibility = View.INVISIBLE
+                        }
+                    }
+                    Toast.makeText(context,"record deleted", Toast.LENGTH_SHORT).show()
+
+                    dialog.dismiss()
+                }
+            }
+        }
+
+        noButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun navigateToSportFragment(weekData: WeekData, index: Int) {

@@ -6,69 +6,297 @@
     android:layout_height="match_parent"
     tools:context=".feature.pagerfragments.SecondWeek">
 
-    <TextView
-        android:id="@+id/day1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="50dp"
-        android:text="Day 1"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/button_design"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDay1"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
+        app:cardCornerRadius="48dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
 
-    <TextView
-        android:id="@+id/day2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="150dp"
-        android:text="Day 2"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/button_design"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bc">
+            <TextView
+                android:id="@+id/day1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design"
+                android:gravity="center"
+                android:text="Day 1"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/day3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="250dp"
-        android:text="Day 3"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/button_design"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/white1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/green1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/day4"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="350dp"
-        android:text="Day 4"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/button_design"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/delete1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/eraser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/white1"
+                app:layout_constraintStart_toEndOf="@+id/day1" />
 
-    <TextView
-        android:id="@+id/day5"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="450dp"
-        android:text="Day 5"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@drawable/button_design"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDay2"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewDay1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bc">
+            <TextView
+                android:id="@+id/day2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design"
+                android:gravity="center"
+                android:text="Day 2"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/white2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/green2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/delete2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/eraser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/white2"
+                app:layout_constraintStart_toEndOf="@+id/day2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDay3"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewDay2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bc">
+            <TextView
+                android:id="@+id/day3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design"
+                android:gravity="center"
+                android:text="Day 3"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/white3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/green3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/delete3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/eraser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/white3"
+                app:layout_constraintStart_toEndOf="@+id/day3" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDay4"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewDay3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bc">
+            <TextView
+                android:id="@+id/day4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design"
+                android:gravity="center"
+                android:text="Day 4"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/white4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/green4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/delete4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/eraser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/white4"
+                app:layout_constraintStart_toEndOf="@+id/day4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewDay5"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewDay4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bc">
+            <TextView
+                android:id="@+id/day5"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/button_design"
+                android:gravity="center"
+                android:text="Day 5"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/white5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/green5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/circle_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/delete5"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/eraser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/white5"
+                app:layout_constraintStart_toEndOf="@+id/day5" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

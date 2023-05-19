@@ -80,4 +80,6 @@ dependencies {
     //for gson converter
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    //for animation
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }

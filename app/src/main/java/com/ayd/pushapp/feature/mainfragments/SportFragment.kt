@@ -1,5 +1,7 @@
 package com.ayd.pushapp.feature.mainfragments
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -112,6 +117,13 @@ class SportFragment : Fragment() {
         val progress = weekData.days[day_index].timeValue * 100
         progressBar.progress = progress
 
+        val teal = ContextCompat.getColor(requireContext(), R.color.teal_200)
+        progressBar.progressTintList = ColorStateList.valueOf(teal)
+
+        binding.timerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        binding.remainingTimeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+
+
         //val counterValue = weekData.days[day_index].timeValue
         timeViewModel.isCounterRunning.observe(viewLifecycleOwner) { isRunning ->
             if (isRunning) {
@@ -139,6 +151,21 @@ class SportFragment : Fragment() {
                 binding.timerTextView.text = "$remainingSeconds"
                 val progress = (remainingSeconds.toFloat() / weekData.days[day_index].timeValue.toFloat() * 100).toInt()
                 progressBar.progress = progress
+
+                if (remainingSeconds <= 10) {
+                    val red = ContextCompat.getColor(requireContext(), R.color.red)
+                    progressBar.progressTintList = ColorStateList.valueOf(red)
+
+                    binding.timerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+                    binding.remainingTimeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+                }else{
+                    val teal = ContextCompat.getColor(requireContext(), R.color.teal_200)
+                    progressBar.progressTintList = ColorStateList.valueOf(teal)
+
+                    binding.timerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                    binding.remainingTimeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                }
+
             },
             onFinish = {
                 binding.timerTextView.text = "0"
@@ -149,6 +176,12 @@ class SportFragment : Fragment() {
         timeViewModel.resetCountdown()
         binding.timerTextView.text = "${weekData.days[day_index].timeValue}"
         progressBar.progress = 100
+
+        val teal = ContextCompat.getColor(requireContext(), R.color.teal_200)
+        progressBar.progressTintList = ColorStateList.valueOf(teal)
+
+        binding.timerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        binding.remainingTimeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
     }
 
 

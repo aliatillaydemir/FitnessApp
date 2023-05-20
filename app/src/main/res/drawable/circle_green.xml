@@ -7,7 +7,7 @@
             android:innerRadiusRatio="5">
             <gradient android:startColor="@color/green"
                 android:endColor="@color/black" android:angle="135"/>
-            <size android:width="36dp" android:height="36dp"/>
+            <size android:width="48dp" android:height="48dp"/>
         </shape>
     </item>
 </selector>

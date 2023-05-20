@@ -52,15 +52,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/delete1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/eraser"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/white1"
-                app:layout_constraintStart_toEndOf="@+id/day1" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -109,15 +100,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/delete2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/eraser"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/white2"
-                app:layout_constraintStart_toEndOf="@+id/day2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -168,16 +150,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/delete3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/eraser"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/white3"
-                app:layout_constraintStart_toEndOf="@+id/day3" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -227,16 +199,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/delete4"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/eraser"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/white4"
-                app:layout_constraintStart_toEndOf="@+id/day4" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -285,16 +247,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/delete5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/eraser"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/white5"
-                app:layout_constraintStart_toEndOf="@+id/day5" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

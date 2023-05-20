@@ -92,25 +92,30 @@ class FirstWeek : Fragment() {
             }
         }
 
-        binding.delete1.setOnClickListener {
+        binding.cardViewDay1.setOnLongClickListener {
             val dayIdToDelete = weekData?.days?.getOrNull(0)?.id
-            showDialogBox(0,dayIdToDelete!!)
+            toggleDayData(dayIdToDelete, binding.white1, binding.green1, weekData)
+            true
         }
-        binding.delete2.setOnClickListener {
+        binding.cardViewDay2.setOnLongClickListener {
             val dayIdToDelete = weekData?.days?.getOrNull(1)?.id
-            showDialogBox(1,dayIdToDelete!!)
+            toggleDayData(dayIdToDelete, binding.white2, binding.green2, weekData)
+            true
         }
-        binding.delete3.setOnClickListener {
+        binding.cardViewDay3.setOnLongClickListener {
             val dayIdToDelete = weekData?.days?.getOrNull(2)?.id
-            showDialogBox(2,dayIdToDelete!!)
+            toggleDayData(dayIdToDelete, binding.white3, binding.green3, weekData)
+            true
         }
-        binding.delete4.setOnClickListener {
+        binding.cardViewDay4.setOnLongClickListener {
             val dayIdToDelete = weekData?.days?.getOrNull(3)?.id
-            showDialogBox(3,dayIdToDelete!!)
+            toggleDayData(dayIdToDelete, binding.white4, binding.green4, weekData)
+            true
         }
-        binding.delete5.setOnClickListener {
+        binding.cardViewDay5.setOnLongClickListener {
             val dayIdToDelete = weekData?.days?.getOrNull(4)?.id
-            showDialogBox(4,dayIdToDelete!!)
+            toggleDayData(dayIdToDelete, binding.white5, binding.green5, weekData)
+            true
         }
 
 
@@ -175,9 +180,39 @@ class FirstWeek : Fragment() {
     }
 
 
-    private fun showDialogBox(btnIndex: Int, dayIdToDelete: Int) {
+    private fun toggleDayData(dayId: Int?, whiteView: View, greenView: View, weekData: WeekData?) {
+        if (dayId != null && weekData != null) {
+            lifecycleScope.launch {
+                val dayData = withContext(Dispatchers.IO) {
+                    dayDataDao.getDayDataById(dayId)
+                }
+                if (dayData != null) {
+                    // Day data exists in the database, show dialog box to delete
+                    showDialogBox(dayId, whiteView, greenView)
+                } else {
+                    // Day data doesn't exist, insert into the database
+                    val dayData = weekData.days.find { it.id == dayId }
+                    if (dayData != null) {
+                        val dayDataEntity = DayData(
+                            dayData.id,
+                            dayData.dayOfWeek,
+                            dayData.timeValue,
+                            dayData.numbers
+                        )
+                        withContext(Dispatchers.IO) {
+                            dayDataDao.insert(dayDataEntity)
+                        }
+                        whiteView.visibility = View.INVISIBLE
+                        greenView.visibility = View.VISIBLE
+                        Toast.makeText(context, "Record inserted", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
 
-        val dialog = Dialog(this.requireContext())
+    private fun showDialogBox(dayIdToDelete: Int, whiteView: View, greenView: View) {
+        val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.custom_dialog_layout)
@@ -188,34 +223,13 @@ class FirstWeek : Fragment() {
 
         yesButton.setOnClickListener {
             lifecycleScope.launch {
-                withContext(Dispatchers.IO){
+                withContext(Dispatchers.IO) {
                     dayDataDao.deleteDayDataById(dayIdToDelete)
                 }
-                withContext(Dispatchers.Main){
-                    when(btnIndex){
-                        0 -> {
-                            binding.white1.visibility = View.VISIBLE
-                            binding.green1.visibility = View.INVISIBLE
-                        }
-                        1 -> {
-                            binding.white2.visibility = View.VISIBLE
-                            binding.green2.visibility = View.INVISIBLE
-                        }
-                        2 -> {
-                            binding.white3.visibility = View.VISIBLE
-                            binding.green3.visibility = View.INVISIBLE
-                        }
-                        3 -> {
-                            binding.white4.visibility = View.VISIBLE
-                            binding.green4.visibility = View.INVISIBLE
-                        }
-                        4 -> {
-                            binding.white5.visibility = View.VISIBLE
-                            binding.green5.visibility = View.INVISIBLE
-                        }
-                    }
-                    Toast.makeText(context,"record deleted",Toast.LENGTH_SHORT).show()
-
+                withContext(Dispatchers.Main) {
+                    whiteView.visibility = View.VISIBLE
+                    greenView.visibility = View.INVISIBLE
+                    Toast.makeText(context, "Record deleted", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
             }
@@ -227,6 +241,7 @@ class FirstWeek : Fragment() {
 
         dialog.show()
     }
+
 
 
     private fun navigateToSportFragment(weekData: WeekData, index: Int) {

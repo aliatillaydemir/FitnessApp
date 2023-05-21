@@ -9,9 +9,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDay1"
         android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="48dp"
-        app:cardCornerRadius="60dp"
+        app:cardCornerRadius="48dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -22,8 +22,8 @@
             android:background="@drawable/gradient_bc">
             <TextView
                 android:id="@+id/day1"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/button_design"
                 android:gravity="center"
                 android:text="Day 1"
@@ -58,9 +58,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDay2"
         android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="60dp"
+        app:cardCornerRadius="48dp"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDay1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -71,8 +71,8 @@
             android:background="@drawable/gradient_bc">
             <TextView
                 android:id="@+id/day2"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/button_design"
                 android:gravity="center"
                 android:text="Day 2"
@@ -107,9 +107,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDay3"
         android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="60dp"
+        app:cardCornerRadius="48dp"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDay2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -120,8 +120,8 @@
             android:background="@drawable/gradient_bc">
             <TextView
                 android:id="@+id/day3"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/button_design"
                 android:gravity="center"
                 android:text="Day 3"
@@ -156,9 +156,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDay4"
         android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="60dp"
+        app:cardCornerRadius="48dp"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDay3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -169,8 +169,8 @@
             android:background="@drawable/gradient_bc">
             <TextView
                 android:id="@+id/day4"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/button_design"
                 android:gravity="center"
                 android:text="Day 4"
@@ -205,9 +205,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDay5"
         android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="60dp"
+        app:cardCornerRadius="48dp"
         app:layout_constraintTop_toBottomOf="@+id/cardViewDay4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -218,8 +218,8 @@
             android:background="@drawable/gradient_bc">
             <TextView
                 android:id="@+id/day5"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/button_design"
                 android:gravity="center"
                 android:text="Day 5"

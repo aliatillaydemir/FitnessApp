@@ -1,6 +1,8 @@
 package com.ayd.pushapp
 
 import android.app.Dialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -25,8 +28,23 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private val DARK_MODE_KEY = "dark_mode_key"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //supportActionBar?.hide()
+
+        // Retrieve the last selected theme from SharedPreferences
+        sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false)
+
+        // Apply the selected theme
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
